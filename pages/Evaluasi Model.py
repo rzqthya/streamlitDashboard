@@ -82,6 +82,7 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import os
 from utils.analysis import load_models, analyze_text, get_topic_words
 from utils.preprocess import read_text_file, full_preprocessing_pipeline
 
@@ -297,8 +298,34 @@ if uploaded_file is not None:
         else:
             st.warning("Tidak dapat mengekstrak topik dari data. Pastikan data valid.")
 
+
+st.subheader("Format File")
+
+# Download Data
+st.write("Unduh Data untuk Evaluasi")
+
+# Path ke file contoh
+example_file_path = "zData Dashboard\Data Aduan 2022-2023.xlsx"
+
+# Cek apakah file tersedia
+if os.path.exists(example_file_path):
+    # Baca datanya untuk ditampilkan
+    try:
+        # Buka file dalam mode biner
+        with open(example_file_path, "rb") as f:
+            file_bytes = f.read()
+            st.download_button(
+                label="📥 Unduh File",
+                data=file_bytes,
+                file_name="data_aduan.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
+    except Exception as e:
+        st.error(f"Gagal membaca file contoh: {str(e)}")
+else:
+    st.warning("File contoh tidak ditemukan. Pastikan file 'data_aduan.xlsx' ada di folder 'data'.")
+
 # Example format section
-st.subheader("Contoh Format File")
 tab1, tab2 = st.tabs(["Format TXT", "Format Excel"])
 
 with tab1:
@@ -318,3 +345,4 @@ with tab2:
         ]
     })
     st.dataframe(df_example)
+
