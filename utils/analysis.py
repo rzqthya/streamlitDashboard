@@ -161,18 +161,31 @@ def visualize_topic_distribution(topic_distribution):
     return chart
 
 # Function to get topic words
+# def get_topic_words(lda_model, num_topics=7, num_words=10):
+#     """Get the most relevant words for each topic"""
+#     topics = {}
+#     for topic_idx in range(num_topics):
+#         topic_words = lda_model.show_topic(topic_idx, topn=num_words)
+#         topics[f"Topik #{topic_idx+1}"] = [
+#             {"word": word.split('_')[0] if '_' in word else word, 
+#              "entity_type": word.split('_')[1] if '_' in word else None,
+#              "prob": prob}
+#             for word, prob in topic_words
+#         ]
+#     return topics
+
 def get_topic_words(lda_model, num_topics=7, num_words=10):
-    """Get the most relevant words for each topic"""
     topics = {}
     for topic_idx in range(num_topics):
         topic_words = lda_model.show_topic(topic_idx, topn=num_words)
         topics[f"Topik #{topic_idx+1}"] = [
-            {"word": word.split('_')[0] if '_' in word else word, 
-             "entity_type": word.split('_')[1] if '_' in word else None,
-             "prob": prob}
+                {"word": word.split('_')[0] if '_' in word else word, 
+                "entity_type": word.split('_')[1] if '_' in word else None,
+                "prob": prob}
             for word, prob in topic_words
         ]
     return topics
+
 
 # Function to create entity visualization
 def visualize_entities(entities_list, title="Entitas Terdeteksi"):

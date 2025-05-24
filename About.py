@@ -70,7 +70,7 @@ Pemilihan jumlah topik ini penting agar informasi yang dihasilkan tidak terlalu 
 """)
     
 st.markdown("""
-    ### Tim Pengembang
+    #### Tim Pengembang
     
     [Made with ❤️ by Rizqy Athiyya Nafi'atus Sa'idah]
     

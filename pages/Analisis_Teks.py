@@ -68,13 +68,13 @@ if st.button("Analisis", type="primary"):
                         
                         # Dictionary penjelasan topik
                         topic_descriptions = {
-                            0: "Penundaan & Ketidakadilan",
-                            1: "Gagal Verifikasi Syarat",
-                            2: "Penolakan & Status Tidak Aktif",
-                            3: "Pendaftaran & Pencatatan",
-                            4: "Distribusi Tidak Merata",
-                            5: "Masalah Pendataan & Blokir",
-                            6: "Prosedur & Akses Bantuan",
+                            0: "Ketimpangan dalam Akses Bantuan",
+                            1: "Hambatan dalam Penyaluran Bantuan",
+                            2: "Masalah Validasi dan Status Kepesertaan",
+                            3: "Kendala Proses Pendaftaran",
+                            4: "Ketidakpuasan terhadap Kinerja Instansi",
+                            5: "Keterbatasan Pendataan dan Akses Informasi",
+                            6: "Respons Pengawasan dan Kebingungan Sistem",
                         }
 
                         # Display dominant topic
