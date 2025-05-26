@@ -4,7 +4,8 @@ from utils.analysis import load_models, analyze_text, visualize_topic_distributi
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
 
 # """Display the Text Analysis page."""
-st.title("Masukkan Teks untuk di Analisis")
+st.title("📝 Analisis Aduan")
+st.markdown("Masukkan satu aduan masyarakat untuk melihat topik utamanya.")
 
 st.write("**Panduan**: Silakan masukkan teks aduan untuk dianalisis berdasarkan topiknya")
     

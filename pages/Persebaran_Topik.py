@@ -5,7 +5,9 @@ import pickle
 from utils.analysis import get_topic_words
 
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
-st.title("🔍 Top Words per Topik")
+
+st.title("🔍 Kata Kunci per Topik")
+st.markdown("Temukan kata-kata utama yang membentuk setiap topik.")
 
 @st.cache_resource
 def load_model():
@@ -23,17 +25,17 @@ topic_titles = {
     3: "Kendala Proses Pendaftaran",
     4: "Ketidakpuasan terhadap Kinerja Instansi",
     5: "Keterbatasan Pendataan dan Akses Informasi",
-    6: "Respons Pengawasan dan Kebingungan Sistem",
+    6: "Respons Pengawasan dan Kebingungan Terhadap Program",
 }
 
 topic_descriptions = {
-    0: "Topik ini membahas masalah ketimpangan distribusi bantuan sosial yang dialami masyarakat...",
-    1: "Hambatan yang ditemui selama proses penyaluran bantuan, termasuk birokrasi dan kendala teknis...",
-    2: "Validasi data dan status kepesertaan menjadi masalah utama yang menyebabkan ketidakjelasan bantuan...",
-    3: "Proses pendaftaran yang rumit dan kurang sosialisasi menyebabkan banyak warga kesulitan...",
-    4: "Ketidakpuasan masyarakat terhadap kinerja instansi yang dianggap lambat dan kurang transparan...",
-    5: "Terbatasnya pendataan dan akses informasi membuat banyak warga tidak mendapatkan bantuan tepat waktu...",
-    6: "Pengawasan yang tidak konsisten dan kebingungan sistem membuat proses distribusi menjadi tidak efektif...",
+    0: "Masyarakat merasa mereka seharusnya menerima bantuan karena sudah memenuhi syarat, tetapi ternyata tidak terdaftar. Mereka baru menyadari hal ini setelah melihat bantuan sudah dibagikan kepada orang lain. Situasi ini menimbulkan rasa tidak adil dalam proses distribusi bantuan.",
+    1: "Masyarakat mengalami kendala data, seperti masalah NIK atau syarat yang belum lengkap. Akibatnya, pengajuan bantuan mereka terhambat. Masalah ini terjadi setelah pengajuan bantuan dilakukan, namun belum masuk tahap distribusi.",
+    2: "Pengajuan bantuan sering ditolak atau gagal diverifikasi. Ada juga yang statusnya masih pending atau tidak aktif, sehingga tidak mendapat bantuan. Masalah ini muncul setelah proses pendaftaran dan saat verifikasi.",
+    3: "Masyarakat mencoba mendaftar bantuan, ada juga yang ditolak meskipun sudah melengkapi syarat. Ini menunjukkan adanya hambatan di awal proses pendaftaran.",
+    4: "Masyarakat mengeluhkan penolakan bantuan tanpa alasan yang jelas. Mereka merasa proses verifikasi tidak transparan dan tidak adil, padahal datanya sudah masuk atau terdaftar.",
+    5: "Banyak warga kesulitan mengajukan bantuan karena kurangnya pendataan dan informasi dari instansi terkait. Beberapa juga mengalami kendala teknis, seperti akun yang diblokir.",
+    6: "Warga sudah berusaha menghubungi Dinas Sosial atau Petugas terkait, tapi merasa tidak mendapatkan jawaban memuaskan. Mereka juga bingung dengan cara kerja pendaftaran.",
 }
 
 cols = st.columns(2)

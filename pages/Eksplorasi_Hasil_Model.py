@@ -88,7 +88,8 @@ from utils.preprocess import read_text_file, full_preprocessing_pipeline
 
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
 
-st.title("Upload Data File Aduan")
+st.title("📂 Unggah File Aduan")
+st.markdown("Unggah file aduan untuk melihat hasil analisis topik.")
     
 # Load models
 try:
@@ -103,7 +104,6 @@ except Exception as e:
     st.stop()
     
 # File uploader with multiple file types
-st.write("Upload file teks atau Excel untuk dianalisis.")
 uploaded_file = st.file_uploader("Pilih file", type=["txt", "xlsx", "xls"])
     
 # Option to show preprocessing details
@@ -251,50 +251,50 @@ if uploaded_file is not None:
             
             st.dataframe(display_df)
             
-            # 5. Top words per topic dengan bar chart
-            st.subheader("Kata Teratas per Topik")
+            # # 5. Top words per topic dengan bar chart
+            # st.subheader("Kata Teratas per Topik")
             
-            # Get top words per topic
-            top_words_per_topic = get_topic_words(lda_model, num_words=5)
+            # # Get top words per topic
+            # top_words_per_topic = get_topic_words(lda_model, num_words=5)
             
-            # Get unique topics in the data
-            unique_topics = df['topic'].unique()
+            # # Get unique topics in the data
+            # unique_topics = df['topic'].unique()
             
-            # Get list of topic IDs that appear in data
-            topic_ids = []
-            for topic_id in range(lda_model.num_topics):
-                topic_name = f"Topik #{topic_id+1}"
-                if topic_name in unique_topics:
-                    topic_ids.append(topic_id)
+            # # Get list of topic IDs that appear in data
+            # topic_ids = []
+            # for topic_id in range(lda_model.num_topics):
+            #     topic_name = f"Topik #{topic_id+1}"
+            #     if topic_name in unique_topics:
+            #         topic_ids.append(topic_id)
             
-            # Create 3 columns layout
-            cols = st.columns(3)
+            # # Create 3 columns layout
+            # cols = st.columns(3)
             
-            # Display topics in the columns (round-robin style)
-            for idx, topic_id in enumerate(topic_ids):
-                topic_name = f"Topik #{topic_id+1}"
-                col_idx = idx % 3  # Determine which column to use (0, 1, or 2)
+            # # Display topics in the columns (round-robin style)
+            # for idx, topic_id in enumerate(topic_ids):
+            #     topic_name = f"Topik #{topic_id+1}"
+            #     col_idx = idx % 3  # Determine which column to use (0, 1, or 2)
                 
-                words = top_words_per_topic.get(topic_name, [])
+            #     words = top_words_per_topic.get(topic_name, [])
                 
-                if words:
-                    # Create DataFrame for visualization
-                    word_df = pd.DataFrame([
-                        {'word': word['word'], 'weight': word['prob']}
-                        for word in words
-                    ])
+            #     if words:
+            #         # Create DataFrame for visualization
+            #         word_df = pd.DataFrame([
+            #             {'word': word['word'], 'weight': word['prob']}
+            #             for word in words
+            #         ])
                     
-                    with cols[col_idx]:
-                        # Create bar chart
-                        topic_chart = alt.Chart(word_df).mark_bar().encode(
-                            x=alt.X('weight:Q', title='Weight'),
-                            y=alt.Y('word:N', title='Word', sort='-x')
-                        ).properties(
-                            title=f'Top Words in {topic_name}',
-                            height=200
-                        )
+            #         with cols[col_idx]:
+            #             # Create bar chart
+            #             topic_chart = alt.Chart(word_df).mark_bar().encode(
+            #                 x=alt.X('weight:Q', title='Weight'),
+            #                 y=alt.Y('word:N', title='Word', sort='-x')
+            #             ).properties(
+            #                 title=f'Top Words in {topic_name}',
+            #                 height=200
+            #             )
                         
-                        st.altair_chart(topic_chart, use_container_width=True)
+            #             st.altair_chart(topic_chart, use_container_width=True)
         else:
             st.warning("Tidak dapat mengekstrak topik dari data. Pastikan data valid.")
 
