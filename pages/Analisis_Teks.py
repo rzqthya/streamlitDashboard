@@ -12,9 +12,9 @@ st.write("**Panduan**: Silakan masukkan teks aduan untuk dianalisis berdasarkan 
 # Load models
 try:
     with st.spinner("Memuat model..."):
-        ner_model, lda_model, dictionary = load_models()
+        ner_model, lda_model, dictionary, cv = load_models()
         
-    if ner_model is None or lda_model is None or dictionary is None:
+    if ner_model is None or lda_model is None or dictionary is None or cv is None:
         st.error("Gagal memuat model. Pastikan file model tersedia di direktori models/")
         st.stop()
 except Exception as e:
@@ -29,7 +29,7 @@ if st.button("Analisis", type="primary"):
         try:
             with st.spinner("Menganalisis teks..."):
                 # Analyze the input text
-                result = analyze_text(text_input, ner_model, lda_model, dictionary)
+                result = analyze_text(text_input, ner_model, lda_model, dictionary, cv)
                     
                 # Display results
                 st.write("**Hasil Analisis**")

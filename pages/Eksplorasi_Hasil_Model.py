@@ -94,9 +94,9 @@ st.markdown("Unggah file aduan untuk melihat hasil analisis topik.")
 # Load models
 try:
     with st.spinner("Memuat model..."):
-        ner_model, lda_model, dictionary = load_models()
+        ner_model, lda_model, dictionary, cv = load_models()
         
-    if ner_model is None or lda_model is None or dictionary is None:
+    if ner_model is None or lda_model is None or dictionary is None or cv is None:
         st.error("Gagal memuat model. Pastikan file model tersedia di direktori models/")
         st.stop()
 except Exception as e:
@@ -158,7 +158,7 @@ if uploaded_file is not None:
         for idx, text in enumerate(texts):
             if text and not text.isspace():  # Skip empty lines
                 # Analyze the text
-                result = analyze_text(text, ner_model, lda_model, dictionary)
+                result = analyze_text(text, ner_model, lda_model, dictionary, cv)
                 
                 # Apply full preprocessing pipeline for detailed preprocessing view
                 preproc_result = full_preprocessing_pipeline(text)
@@ -211,7 +211,7 @@ if uploaded_file is not None:
             # 2. Distribusi topik dominan dengan pie chart (in second column)
             with col2:
                 if not df.empty:
-                    st.subheader("Distribusi Topik Dominan")
+                    st.subheader("Identifikasi Topik")
                     
                     # Create pie chart using Altair
                     topic_counts = df['topic'].value_counts().reset_index()
