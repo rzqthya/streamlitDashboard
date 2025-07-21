@@ -88,8 +88,9 @@ from utils.preprocess import read_text_file, full_preprocessing_pipeline
 
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
 
-st.title("📂 Unggah File Aduan")
-st.markdown("Unggah file aduan untuk melihat hasil analisis topik.")
+st.title("📂 Pemetaan Topik dari File Aduan")
+st.markdown("**Panduan:** Unggah file aduan untuk melihat hasil pengelompokan topik berdasarkan analisis model, yang disajikan dalam bentuk topik yang mudah dipahami.")
+
     
 # Load models
 try:
@@ -107,7 +108,7 @@ except Exception as e:
 uploaded_file = st.file_uploader("Pilih file", type=["txt", "xlsx", "xls"])
     
 # Option to show preprocessing details
-show_preprocessing = st.checkbox("Tampilkan detail preprocessing", value=False)
+show_preprocessing = st.checkbox("Tampilkan detail pembersihan data teks", value=False)
 
 if uploaded_file is not None:
     # Process based on file type
@@ -181,8 +182,8 @@ if uploaded_file is not None:
                     # Add to results
                     all_results.append({
                         'text': text[:50] + '...' if len(text) > 50 else text,
-                        'topic': f"Topik #{result['dominant_topic'][0]+1}",
-                        'probability': round(result['dominant_topic'][1], 4),
+                        'topic': f"Topik {result['dominant_topic'][0]+1}",
+                        'probability': f"{result['dominant_topic'][1] * 100:.2f}%",
                         'entities': entity_text
                     })
                 else:
@@ -202,16 +203,16 @@ if uploaded_file is not None:
             
             # 1. Jumlah data yang masuk (in first column)
             with col1:
-                st.subheader("Jumlah Data Yang Masuk")
+                st.subheader("Jumlah Data")
                 st.metric("Total Data", len(df))
                 # Tampilkan informasi data yang dilewati
-                if skipped_data > 0:
-                    st.info(f"Catatan: {skipped_data} data dilewati karena kosong atau tidak memiliki topik dominan.")
+                # if skipped_data > 0:
+                #     st.info(f"Catatan: {skipped_data} data dilewati karena kosong atau tidak memiliki topik dominan.")
             
             # 2. Distribusi topik dominan dengan pie chart (in second column)
             with col2:
                 if not df.empty:
-                    st.subheader("Identifikasi Topik")
+                    st.subheader("Frekuensi Topik")
                     
                     # Create pie chart using Altair
                     topic_counts = df['topic'].value_counts().reset_index()
@@ -230,12 +231,12 @@ if uploaded_file is not None:
             
             # 3. Detail preprocessing sebagai tabel
             if show_preprocessing and preproc_df is not None:
-                st.subheader("Detail Preprocessing")
+                st.subheader("Detail Pembersihan Data")
                 
                 # Convert to a clean table format
                 preproc_table = pd.DataFrame({
                     'Teks Asli': preproc_df['original_text'],
-                    'Setelah Preprocessing': preproc_df['preprocessed_text'],
+                    'Setelah Teks Bersih': preproc_df['preprocessed_text'],
                     # 'Token': preproc_df['tokens'].apply(lambda x: ', '.join(x) if isinstance(x, list) else '')
                 })
                 
@@ -246,7 +247,7 @@ if uploaded_file is not None:
             
             # Add row numbers and rename columns
             display_df = df.copy().reset_index()
-            display_df.columns = ['No', 'Teks', 'Topik', 'Probability', 'Entitas']
+            display_df.columns = ['No', 'Teks', 'Topik', 'Probabilitas', 'Informasi berupa Entitas']
             display_df['No'] = display_df['No'] + 1  # Start from 1 instead of 0
             
             st.dataframe(display_df)
@@ -302,7 +303,7 @@ if uploaded_file is not None:
 st.subheader("Format File")
 
 # Download Data
-st.write("Unduh Data untuk Evaluasi")
+st.write("Unduh Data Aduan untuk Melihat Informasi Topik")
 
 # Path ke file contoh
 example_file_path = "zData Dashboard\Data Aduan 2022-2023.xlsx"
@@ -346,3 +347,13 @@ with tab2:
     })
     st.dataframe(df_example)
 
+st.markdown("""---""")  # garis pemisah
+
+st.markdown(
+    """
+    <div style='text-align: center; font-size: 0.9em; color: gray;'>
+        © Sistem Analisis Topik Aduan | 2025
+    </div>
+    """,
+    unsafe_allow_html=True
+)

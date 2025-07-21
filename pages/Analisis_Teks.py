@@ -4,10 +4,8 @@ from utils.analysis import load_models, analyze_text, visualize_topic_distributi
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
 
 # """Display the Text Analysis page."""
-st.title("📝 Analisis Aduan")
-st.markdown("Masukkan satu aduan masyarakat untuk melihat topik utamanya.")
-
-st.write("**Panduan**: Silakan masukkan teks aduan untuk dianalisis berdasarkan topiknya")
+st.title("📝 Analisis Topik dari Aduan")
+st.markdown("**Panduan**: Silakan masukkan teks aduan untuk dianalisis topiknya")
     
 # Load models
 try:
@@ -49,7 +47,7 @@ if st.button("Analisis", type="primary"):
                     #         st.write("Tidak ada token yang tersisa setelah preprocessing.")
                     
                 # Display entities
-                st.write("**Entitas Terdeteksi**")
+                st.write("**Informasi Kata Kunci yang Di ekstrak berupa Entitas**")
                 entities = result['entities']
                     
                 # Check if any entities were found
@@ -58,10 +56,10 @@ if st.button("Analisis", type="primary"):
                         if entity_list:
                             st.write(f"{entity_type}: {', '.join(entity_list)}")
                 else:
-                    st.info("Tidak ada entitas yang terdeteksi.")
+                    st.info("Tidak ada informasi yang terdeteksi relevan.")
                     
                     # Display topic distribution
-                st.write("**Identifikasi Topik**")
+                st.write("**Hasil Analisis Topik**")
                 if result['topics']:
                         # chart = visualize_topic_distribution(result['topics'])
                         # if chart:
@@ -69,25 +67,25 @@ if st.button("Analisis", type="primary"):
                         
                         # Dictionary penjelasan topik
                         topic_descriptions = {
-                            0: "Ketimpangan dalam Akses Bantuan",
-                            1: "Hambatan dalam Penyaluran Bantuan",
-                            2: "Masalah Validasi dan Status Kepesertaan",
-                            3: "Kendala Proses Pendaftaran",
-                            4: "Ketidakpuasan terhadap Kinerja Instansi",
+                            0: "Persepsi Ketimpangan Akses Bantuan",
+                            1: "Kendala Penyaluran Bantuan",
+                            2: "Kendala Status dan Validasi Kepesertaan",
+                            3: "Kendala Pendaftaran Bantuan",
+                            4: "Persepsi Kinerja Instansi",
                             5: "Keterbatasan Pendataan dan Akses Informasi",
-                            6: "Respons Pengawasan dan Kebingungan Sistem",
+                            6: "Kurangnya Pemahaman Prosedur",
                         }
 
                         # Display dominant topic
                         if result['dominant_topic']:
                             topic_idx, topic_prob = result['dominant_topic']
-                            st.write(f"Identifikasi Topik: Topik #{topic_idx + 1} (Probabilitas: {topic_prob:.4f})")
+                            st.info(f"Aduan tersebut masuk dalam: Topik {topic_idx + 1} (dengan probabilitas: {topic_prob * 100:.2f}%). Membicarakan tentang topik : {topic_descriptions[topic_idx]}")
 
                             # Tampilkan deskripsi topik jika ada
-                            if topic_idx in topic_descriptions:
-                                st.info(f"Topik {topic_idx + 1} adalah tentang: {topic_descriptions[topic_idx]}")
-                            else:
-                                st.info("Deskripsi topik belum tersedia.")
+                            # if topic_idx in topic_descriptions:
+                            #     st.write(f"Topik {topic_idx + 1} adalah tentang: {topic_descriptions[topic_idx]}")
+                            # else:
+                            #     st.write("Deskripsi topik belum tersedia.")
                                 
                             # # Get words for the dominant topic
                             # topics = get_topic_words(lda_model)
@@ -114,6 +112,17 @@ if st.button("Analisis", type="primary"):
             st.info("Silakan coba lagi dengan teks yang berbeda atau hubungi administrator sistem.")
     else:
         st.warning("Silakan masukkan teks untuk dianalisis.")
+
+st.markdown("""---""")  # garis pemisah
+
+st.markdown(
+    """
+    <div style='text-align: center; font-size: 0.9em; color: gray;'>
+        © Sistem Analisis Topik Aduan | 2025
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # import streamlit as st
 # from utils.analysis import load_models, analyze_text, visualize_topic_distribution, get_topic_words, visualize_entities

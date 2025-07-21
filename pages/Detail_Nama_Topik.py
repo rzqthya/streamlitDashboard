@@ -6,8 +6,8 @@ from utils.analysis import get_topic_words
 
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
 
-st.title("🔍 Kata Kunci per Topik")
-st.markdown("Temukan kata-kata utama yang membentuk setiap topik.")
+st.title("🔍 Rincian Topik")
+st.markdown("Berikut adalah topik-topik yang berhasil diidentifikasi oleh model.")
 
 @st.cache_resource
 def load_model():
@@ -19,13 +19,13 @@ num_words = st.slider("Jumlah Kata Teratas", 3, 15, 5)
 top_words_per_topic = get_topic_words(lda_model, num_words=num_words)
 
 topic_titles = {
-    0: "Ketimpangan dalam Akses Bantuan",
-    1: "Hambatan dalam Penyaluran Bantuan",
-    2: "Masalah Validasi dan Status Kepesertaan",
-    3: "Kendala Proses Pendaftaran",
-    4: "Ketidakpuasan terhadap Kinerja Instansi",
+    0: "Persepsi Ketimpangan Akses Bantuan",
+    1: "Kendala Penyaluran Bantuan",
+    2: "Kendala Status dan Validasi Kepesertaan",
+    3: "Kendala Pendaftaran Bantuan",
+    4: "Persepsi Kinerja Instansi",
     5: "Keterbatasan Pendataan dan Akses Informasi",
-    6: "Respons Pengawasan dan Kebingungan Terhadap Program",
+    6: "Kurangnya Pemahaman Prosedur",
 }
 
 topic_descriptions = {
@@ -63,3 +63,14 @@ for idx, (topic_name, words) in enumerate(top_words_per_topic.items()):
         desc = topic_descriptions.get(top_num, "")
         if desc:
             st.markdown(f"{desc}")
+
+st.markdown("""---""")  # garis pemisah
+
+st.markdown(
+    """
+    <div style='text-align: center; font-size: 0.9em; color: gray;'>
+        © Sistem Analisis Topik Aduan | 2025
+    </div>
+    """,
+    unsafe_allow_html=True
+)

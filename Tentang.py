@@ -84,7 +84,7 @@ import streamlit as st
 # Sidebar logo
 st.sidebar.image("assets/Dinas_Sosial.png", width=150)
 
-st.title("📘 Tentang Aplikasi")
+st.title("📘 Sistem Analisis Topik Aduan")
 st.markdown("Pelajari fungsi dan tujuan aplikasi ini secara singkat.")
 
 # GAMBARA UMUM APLIKASI
@@ -102,10 +102,10 @@ st.write("""
 
 Berikut penjelasan fungsi dari setiap menu:
 
-- **Tentang Aplikasi**: Menjelaskan tujuan dan cara kerja aplikasi ini
-- **Analisis Teks**: Untuk mengecek topik dari satu aduan secara langsung, cukup dengan memasukkan teks aduan.
-- **Eksplorasi Hasil Model**: Untuk melihat ringkasan topik yang berhasil ditemukan dari semua aduan yang sudah dianalisis
-- **Persebaran Topik**: Untuk melihat kata-kata penting dalam setiap topik, sehingga memudahkan memahami topik aduan secara umum.
+- **Tentang**: Menjelaskan tujuan dan cara kerja aplikasi ini
+- **Analisis Teks**: Untuk melihat topik dari satu aduan, cukup dengan memasukkan teks aduan.
+- **Informasi Model Topik**: Menampilkan ringkasan topik yang berhasil diidentifikasi dari seluruh aduan melalui hasil pemodelan.
+- **Nama Topik**: Untuk melihat nama topik yang tersedia disertai kata-kata penting dalam setiap topik dan penjelasannya.
 """)
 
 # PROSES DATA
@@ -131,12 +131,24 @@ Dengan hasil ini, sistem mampu mengenali dan mengelompokkan 7 topik utama dari r
 
 st.image("assets/Metrics Evaluation Edit.png", width=950)
 
-# TIM PENGEMBANG
-st.write("""
-#### Tim Pengembang
 
-[by Rizqy Athiyya Nafi'atus Sa'idah]  
-Dengan dukungan dari:
-- Dinas Sosial Jawa Timur  
-- Telkom University Surabaya
-""")
+st.markdown("""---""")  # garis pemisah
+
+st.markdown(
+    """
+    <div style='text-align: center; font-size: 0.9em; color: gray;'>
+        © Sistem Analisis Topik Aduan | 2025
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# TIM PENGEMBANG
+# st.write("""
+# #### Tim Pengembang
+
+# [by Rizqy Athiyya Nafi'atus Sa'idah]  
+# Dengan dukungan dari:
+# - Dinas Sosial Jawa Timur  
+# - Telkom University Surabaya
+# """)
