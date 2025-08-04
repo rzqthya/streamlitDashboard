@@ -1,5 +1,5 @@
 import streamlit as st
-import ntlk
+import nltk
 from utils.analysis import load_models, analyze_text, visualize_topic_distribution, get_topic_words, visualize_entities
 
 st.sidebar.image("assets/ComplainInsight.png", width=150)
