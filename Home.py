@@ -129,7 +129,7 @@ Model berhasil mencapai nilai **Nilai Koherensi sebesar 76,72%**, yang menunjukk
 Dengan hasil ini, sistem mampu mengenali dan mengelompokkan 7 topik utama dari ribuan aduan yang telah dianalisis.
 """)
 
-st.image("assets/Metrics Evaluation Edit.PNG", width=950)
+st.image("assets/Metrics Evaluation Edit.PNG", width=650)
 
 
 st.markdown("""---""")  # garis pemisah
