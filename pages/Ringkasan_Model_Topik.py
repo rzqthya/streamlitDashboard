@@ -225,7 +225,7 @@ st.subheader("Format File")
 st.write("Unduh Data Aduan untuk Melihat Informasi Topik")
 
 # Path ke file contoh
-example_file_path = "zData Dashboard\Data Aduan 2022-2023.xlsx"
+example_file_path = "zData Dashboard/Data Aduan 2022-2023.xlsx"
 
 # Cek apakah file tersedia
 if os.path.exists(example_file_path):
