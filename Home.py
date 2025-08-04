@@ -82,7 +82,7 @@
 import streamlit as st
 
 # Sidebar logo
-st.sidebar.image("assets/Dinas_Sosial.png", width=150)
+st.sidebar.image("assets/ComplainInsight.png", width=150)
 
 st.title("📘 Sistem Analisis Topik Aduan")
 st.markdown("Pelajari fungsi dan tujuan aplikasi ini secara singkat.")

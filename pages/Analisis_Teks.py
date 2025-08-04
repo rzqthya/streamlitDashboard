@@ -1,7 +1,7 @@
 import streamlit as st
 from utils.analysis import load_models, analyze_text, visualize_topic_distribution, get_topic_words, visualize_entities
 
-st.sidebar.image("assets/Dinas_Sosial.png", width=150)
+st.sidebar.image("assets/ComplainInsight.png", width=150)
 
 # """Display the Text Analysis page."""
 st.title("📝 Analisis Topik dari Aduan")
@@ -32,20 +32,6 @@ if st.button("Analisis", type="primary"):
                 # Display results
                 st.write("**Hasil Analisis**")
                     
-                    # Show preprocessing results
-                    # with st.expander("Lihat Detail Preprocessing"):
-                    #     st.write("**Teks Asli:**")
-                    #     st.write(text_input)
-                        
-                    #     st.write("**Teks Setelah Preprocessing:**")
-                    #     st.write(result['preprocessed_text'])
-                        
-                    #     st.write("**Tokens Setelah Stopwords Removal:**")
-                    #     if result['tokens']:
-                    #         st.write(', '.join(result['tokens']))
-                    #     else:
-                    #         st.write("Tidak ada token yang tersisa setelah preprocessing.")
-                    
                 # Display entities
                 st.write("**Informasi Kata Kunci yang Di ekstrak berupa Entitas**")
                 entities = result['entities']
@@ -61,9 +47,6 @@ if st.button("Analisis", type="primary"):
                     # Display topic distribution
                 st.write("**Hasil Analisis Topik**")
                 if result['topics']:
-                        # chart = visualize_topic_distribution(result['topics'])
-                        # if chart:
-                        #     st.altair_chart(chart, use_container_width=True)
                         
                         # Dictionary penjelasan topik
                         topic_descriptions = {
@@ -81,28 +64,6 @@ if st.button("Analisis", type="primary"):
                             topic_idx, topic_prob = result['dominant_topic']
                             st.info(f"Aduan tersebut masuk dalam: Topik {topic_idx + 1} (dengan probabilitas: {topic_prob * 100:.2f}%). Membicarakan tentang topik : {topic_descriptions[topic_idx]}")
 
-                            # Tampilkan deskripsi topik jika ada
-                            # if topic_idx in topic_descriptions:
-                            #     st.write(f"Topik {topic_idx + 1} adalah tentang: {topic_descriptions[topic_idx]}")
-                            # else:
-                            #     st.write("Deskripsi topik belum tersedia.")
-                                
-                            # # Get words for the dominant topic
-                            # topics = get_topic_words(lda_model)
-                            # dominant_topic_words = topics[f"Topik #{topic_idx + 1}"]
-                                
-                            # st.write("**Kata-kata dalam Topik Dominan:**")
-                            # words_table = []
-                            # for item in dominant_topic_words[:5]:  # Show top 5 words
-                            #     word = item['word']
-                            #     entity_type = item['entity_type']
-                            #     prob = item['prob']
-                            #     if entity_type:
-                            #         words_table.append(f"{word} ({entity_type}): {prob:.4f}")
-                            #     else:
-                            #         words_table.append(f"{word}: {prob:.4f}")
-                                
-                            # st.write(", ".join(words_table))
                         else:
                             st.info("Tidak dapat membuat visualisasi topik.")
                 else:

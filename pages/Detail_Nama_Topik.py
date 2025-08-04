@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 from utils.analysis import get_topic_words
 
-st.sidebar.image("assets/Dinas_Sosial.png", width=150)
+st.sidebar.image("assets/ComplainInsight.png", width=150)
 
 st.title("🔍 Rincian Topik")
 st.markdown("Berikut adalah topik-topik yang berhasil diidentifikasi oleh model.")

@@ -1,84 +1,3 @@
-# import streamlit as st
-# import pandas as pd
-# from utils.analysis import load_models, visualize_topic_distribution_from_file
-# from utils.preprocess import read_text_file
-
-# st.sidebar.image("assets/Dinas_Sosial.png", width=150)
-
-# # """Display the Visualization page."""
-# st.title("Upload Data File Aduan")
-    
-#     # Load models
-# try:
-#     with st.spinner("Memuat model..."):
-#         ner_model, lda_model, dictionary = load_models()
-        
-#     if ner_model is None or lda_model is None or dictionary is None:
-#         st.error("Gagal memuat model. Pastikan file model tersedia di direktori models/")
-#         st.stop()
-# except Exception as e:
-#     st.error(f"Error: {str(e)}")
-#     st.stop()
-    
-#     # File uploader
-# # st.subheader("Upload File Teks")
-# st.write("Upload file teks dengan setiap baris berisi satu teks untuk dianalisis.")
-# uploaded_file = st.file_uploader("Pilih file teks", type=["txt"])
-    
-#     # Option to show preprocessing details
-# show_preprocessing = st.checkbox("Tampilkan detail preprocessing", value=False)
-    
-# if uploaded_file is not None:
-#         # Read the file
-#     file_content = read_text_file(uploaded_file)
-        
-#     if file_content:
-#         with st.spinner("Menganalisis file..."):
-#             # Process the file and visualize topic distribution
-#             chart, df, preproc_df = visualize_topic_distribution_from_file(file_content, ner_model, lda_model, dictionary)
-                
-#             if chart:
-#                 st.subheader("Distribusi Topik Dominan")
-#                 st.altair_chart(chart, use_container_width=True)
-                    
-#                     # Show the preprocessing details if checked
-#                 if show_preprocessing and preproc_df is not None:
-#                     st.subheader("Detail Preprocessing")
-#                     for idx, row in preproc_df.iterrows():
-#                         with st.expander(f"Teks #{idx+1}: {row['original_text'][:50]}..."):
-#                             st.write("**Teks Asli:**")
-#                             st.write(row['original_text'])
-                                
-#                             st.write("**Setelah Preprocessing:**")
-#                             st.write(row['preprocessed_text'])
-                                
-#                             st.write("**Tokens:**")
-#                             st.write(', '.join(row['tokens']) if row['tokens'] else "Tidak ada tokens")
-                    
-#                 # Show the data
-#                 st.subheader("Data")
-#                 st.dataframe(df)
-                    
-#                 # Group by topic to get count and average probability
-#                 topic_stats = df.groupby('topic').agg({
-#                     'probability': ['mean', 'count']
-#                 }).reset_index()
-#                 topic_stats.columns = ['Topik', 'Probabilitas Rata-rata', 'Jumlah']
-                    
-#                 st.subheader("Statistik Topik")
-#                 st.dataframe(topic_stats)
-#             else:
-#                 st.warning("Tidak dapat mengekstrak topik dari file. Pastikan file berisi teks yang valid.")
-#     else:
-#         st.error("File tidak dapat dibaca atau kosong.")
-    
-#     # Example data
-# st.subheader("Contoh Format File")
-# st.code("""Saya belum menerima bantuan PKH
-# Bantuan sosial tidak tepat sasaran oleh RT dan RW
-# Pengajuan bantuan di dinas sosial surabaya gagal
-# Bagaimana cara mendaftarkan diri untuk program bantuan pemerintah?""")
-
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -86,7 +5,7 @@ import os
 from utils.analysis import load_models, analyze_text, get_topic_words
 from utils.preprocess import read_text_file, full_preprocessing_pipeline
 
-st.sidebar.image("assets/Dinas_Sosial.png", width=150)
+st.sidebar.image("assets/ComplainInsight.png", width=150)
 
 st.title("📂 Pemetaan Topik dari File Aduan")
 st.markdown("**Panduan:** Unggah file aduan untuk melihat hasil pengelompokan topik berdasarkan analisis model, yang disajikan dalam bentuk topik yang mudah dipahami.")
@@ -357,3 +276,85 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+
+# import streamlit as st
+# import pandas as pd
+# from utils.analysis import load_models, visualize_topic_distribution_from_file
+# from utils.preprocess import read_text_file
+
+# st.sidebar.image("assets/Dinas_Sosial.png", width=150)
+
+# # """Display the Visualization page."""
+# st.title("Upload Data File Aduan")
+    
+#     # Load models
+# try:
+#     with st.spinner("Memuat model..."):
+#         ner_model, lda_model, dictionary = load_models()
+        
+#     if ner_model is None or lda_model is None or dictionary is None:
+#         st.error("Gagal memuat model. Pastikan file model tersedia di direktori models/")
+#         st.stop()
+# except Exception as e:
+#     st.error(f"Error: {str(e)}")
+#     st.stop()
+    
+#     # File uploader
+# # st.subheader("Upload File Teks")
+# st.write("Upload file teks dengan setiap baris berisi satu teks untuk dianalisis.")
+# uploaded_file = st.file_uploader("Pilih file teks", type=["txt"])
+    
+#     # Option to show preprocessing details
+# show_preprocessing = st.checkbox("Tampilkan detail preprocessing", value=False)
+    
+# if uploaded_file is not None:
+#         # Read the file
+#     file_content = read_text_file(uploaded_file)
+        
+#     if file_content:
+#         with st.spinner("Menganalisis file..."):
+#             # Process the file and visualize topic distribution
+#             chart, df, preproc_df = visualize_topic_distribution_from_file(file_content, ner_model, lda_model, dictionary)
+                
+#             if chart:
+#                 st.subheader("Distribusi Topik Dominan")
+#                 st.altair_chart(chart, use_container_width=True)
+                    
+#                     # Show the preprocessing details if checked
+#                 if show_preprocessing and preproc_df is not None:
+#                     st.subheader("Detail Preprocessing")
+#                     for idx, row in preproc_df.iterrows():
+#                         with st.expander(f"Teks #{idx+1}: {row['original_text'][:50]}..."):
+#                             st.write("**Teks Asli:**")
+#                             st.write(row['original_text'])
+                                
+#                             st.write("**Setelah Preprocessing:**")
+#                             st.write(row['preprocessed_text'])
+                                
+#                             st.write("**Tokens:**")
+#                             st.write(', '.join(row['tokens']) if row['tokens'] else "Tidak ada tokens")
+                    
+#                 # Show the data
+#                 st.subheader("Data")
+#                 st.dataframe(df)
+                    
+#                 # Group by topic to get count and average probability
+#                 topic_stats = df.groupby('topic').agg({
+#                     'probability': ['mean', 'count']
+#                 }).reset_index()
+#                 topic_stats.columns = ['Topik', 'Probabilitas Rata-rata', 'Jumlah']
+                    
+#                 st.subheader("Statistik Topik")
+#                 st.dataframe(topic_stats)
+#             else:
+#                 st.warning("Tidak dapat mengekstrak topik dari file. Pastikan file berisi teks yang valid.")
+#     else:
+#         st.error("File tidak dapat dibaca atau kosong.")
+    
+#     # Example data
+# st.subheader("Contoh Format File")
+# st.code("""Saya belum menerima bantuan PKH
+# Bantuan sosial tidak tepat sasaran oleh RT dan RW
+# Pengajuan bantuan di dinas sosial surabaya gagal
+# Bagaimana cara mendaftarkan diri untuk program bantuan pemerintah?""")
